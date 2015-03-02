@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by http://cafe.naver.com/citrineframework
+	You can freely copy, distribute, modify for commercial or non-commercial purposes.
+-->
+<MOML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui.xsd" version="1.1.1">
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<LIST2 id="myShop" layout="0,0,720,1230" dataSource="http://www.marihas.com/logeo/list_item.php?ca_id=101010" dataList="/DATA/ITEMLIST/ITEM" divider="#00e4e4e4" onScroll="function.onScroll">
+			<LISTLAYOUT>
+				<WINDOW layout="0,0,720,672" align="relative" defaultImg="#ffffff">
+					<IMAGE id="underImage" layout="0,0,720,672" defaultImg="{xpath.evaluate('./IMAGE/text()')}" />
+					<IMAGE layout="0,0,720,672" defaultImg="res/img_grd1.png" />
+					<IMAGE layout="0,572,120,100" defaultImg="#d93f67">
+						<LABEL layout="0,0,120,100" text="{xpath.evaluate('./MAKER/text()')}" fontSize="30" minFontSize="-1" textAlign="center" textColor="#ffffff" />
+					</IMAGE>
+					<LABEL layout="140,572,560,48" text="{xpath.evaluate('./NAME/text()')}" fontSize="35" minFontSize="-1" textAlign="vCenter" textColor="#ffffff" textShadow="#000000" />
+					<LABEL layout="140,622,560,48" text="{xpath.evaluate('./CUSTAMOUNT/text()')  + '   >   ' +xpath.evaluate('./AMOUNT/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter" textColor="#c9c9c9"
+						textShadow="#000000" />
+					<LABEL layout="140,620,560,2" defaultImg="#8f8d8d" />
+					<BUTTON layout="0,0,720,672" defaultImg="#00ffffff" onClick="function.goDetail(xpath.evaluate('./URL/text()'))" />
+				</WINDOW>
+			</LISTLAYOUT>
+		</LIST2>
+	</UILAYOUT>
+
+	<FUNCTION id="goDetail(url)">
+		<CMD cmd="animation.flyIn('caller.container.underImage', 30, 30, caller.container.underImage.width-60,caller.container.underImage.height-60, 'roundTrip|reverse', 500, '')" />
+		<CMD cmd="userVariable.dataUrl = url" />
+		<CMD cmd="container.open('underDetail.xml', 'root.detail')" delay="500" />
+	</FUNCTION>
+
+
+</MOML> 

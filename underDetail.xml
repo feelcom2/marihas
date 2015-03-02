@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by http://cafe.naver.com/citrineframework
+	You can freely copy, distribute, modify for commercial or non-commercial purposes.
+-->
+<MOML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui.xsd" version="1.1.1">
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<POPUP layout="0,0,720,1230" defaultImg="#ffffff" showEffect="fade:500" hideEffect="fade:500" onClick="action:close()" align="relative">
+			<IMAGE id="backBg" layout="0,0,720,850" defaultImg="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/IMAGE/IMAGE[1]/text()')}">
+				<STYLEBUTTON layout="24,256,auto,60" text="{userVariable.categoryName}" fontSize="30" minFontSize="-1" textColor="#ffffff" fontStyle="bold" defaultImg="#ddb93d5d" shape="roundRect(30)"
+					borderStyle="solid:3|#ddffffff" padding="10,10,10,10" />
+				<LABEL layout="24,320,570,auto" text="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/NAME/text()')}" fontSize="40" minFontSize="-1" textColor="#ffffff" fontStyle="bold"
+					defaultImg="#99000000" padding="10,10,10,10" multiLine="true" />
+				<LABEL layout="24,{prev.bottom + 20},500,60" text="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/CUSTAMOUNT/text()') + '   >   ' + xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/AMOUNT/text()')}"
+					fontSize="50" minFontSize="-1" textColor="#ffffff" fontStyle="bold" textAlign="vCenter" textShadow="#000000" />
+				<IMAGE id="backBg1" layout="0,0,720,850" defaultImg="res/img_grd2.png" />
+			</IMAGE>
+			<WINDOW layout="0,0,720,1230" align="linear:vertical" scroll="vertical" scrollBarVisible="true" onScroll="function.onScroll">
+				<WINDOW layout="720,150" defaultImg="res/img_mask1.png" align="relative" margin="0,700,0,0">
+					<WINDOW layout="0,0,720,150" defaultImg="res/img_evaluation.png">
+						<LABEL layout="0,30,190,120" text="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/ORIGIN/text()')}" fontSize="40" minFontSize="-1" textColor="#ffffff" fontStyle="bold" textAlign="center" />
+					</WINDOW>
+					<IMAGE layout="190,0,70,150" defaultImg="res/btn_quik_review.png" />
+				</WINDOW>
+				<WINDOW layout="720,720" defaultImg="#ffffff" align="relative">
+					<IMAGE layout="10,10,700,700" defaultImg="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/IMAGE/IMAGE[2]/text()')}" align="relative" />
+				</WINDOW>
+				<WINDOW layout="720,720" defaultImg="#ffffff" align="relative">
+					<IMAGE layout="10,10,700,700" defaultImg="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/IMAGE/IMAGE[3]/text()')}" align="relative" />
+				</WINDOW>
+				<WINDOW layout="720,720" defaultImg="#ffffff" align="relative">
+					<IMAGE layout="10,10,700,700" defaultImg="{xpath.evaluateEx(file.read(userVariable.dataUrl), '/ITEM/IMAGE/IMAGE[4]/text()')}" align="relative" />
+				</WINDOW>
+			</WINDOW>
+			<WINDOW id="backBtn" layout="0,25,720,92" align="relative">
+				<BUTTON layout="25,0,92sr,92sr" defaultImg="res/btn_back.png" onClick="container.close()" />
+			</WINDOW>
+			<WINDOW id="shareBtn" layout="0,25,720,92" align="relative">
+				<BUTTON layout="608,0,92sr,92sr" defaultImg="res/btn_share.png" />
+			</WINDOW>
+		</POPUP>
+	</UILAYOUT>
+	<FUNCTION id="onScroll(x,y)">
+		<CMD cmd="h = 900" />
+		<CMD cmd="device.log('cgy', 'onScroll : ' + y)" />
+		<CMD condition="y lt h">
+			<CMD>
+				<CMD cmd="alpha = math.max(0, math.min(y,h)/h) * 255" />
+				<CMD cmd="device.log('cgy', 'onScroll : ' + alpha)" />
+				<CMD cmd="backBg.top = - y / 2" />
+				<CMD cmd="backBtn.left =  - y / 5" />
+				<CMD cmd="shareBtn.left =   y / 5" />
+			</CMD>
+		</CMD>
+		<!-- <CMD condition="y gt 800"> -->
+		<!-- <CMD> -->
+		<!-- <CMD cmd="backBtn.visible='invisible'" /> -->
+		<!-- <CMD cmd="shareBtn.visible='invisible'" /> -->
+		<!-- <CMD cmd="menuBtn.visible='invisible'" /> -->
+		<!-- </CMD> -->
+		<!-- <ELSECMD> -->
+		<!-- <CMD cmd="backBtn.visible='visible'" /> -->
+		<!-- <CMD cmd="shareBtn.visible='visible'" /> -->
+		<!-- <CMD cmd="menuBtn.visible='visible'" /> -->
+		<!-- </ELSECMD> -->
+		<!-- </CMD> -->
+	</FUNCTION>
+</MOML> 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by http://cafe.naver.com/citrineframework
+	You can freely copy, distribute, modify for commercial or non-commercial purposes.
+-->
+<MOML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui.xsd" version="1.1.1">
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<WINDOW id="mainWindow" layout="0,0,720,1230" align="relative">
+			<NAVIGATIONCONTAINER id="start_navigationContainer" layout="0,0,720,1230" selectedItem="list" defaultImg="#ffffff">
+				<VIEWITEM id="list" src="underMain.xml" transitionInEffect="none" transitionOutEffect="none" />
+				<VIEWITEM id="best" src="bestDetail.xml" transitionInEffect="none" transitionOutEffect="none" />
+			</NAVIGATIONCONTAINER>
+			<BUTTON id="mainBtn" layout="25,25,92sr,92sr" defaultImg="res/btn_sidemenu.png" onClick="function.menuCheck" />
+			<BUTTON layout="608,25,92sr,92sr" defaultImg="res/btn_search.png" onClick="function.searchCheck" />
+			<IMAGE layout="0,0,720,140" defaultImg="res/img_grd3.png" />
+			<LABEL id="titleLabel" layout="140,0,400,140" text="냄비/주전자" fontSize="40" minFontSize="-1" textAlign="vCenter" textColor="#ffffff" textShadow="#000000" />
+		</WINDOW>
+		<WINDOW id="bgWindow" layout="0,0,720,1230" defaultImg="#bb000000" enabled="true" visible="invisible" onClick="'none'" />
+		<WINDOW id="menuWindow" layout="0,0,480,1230" align="linear:vertical" visible="invisible">
+			<WINDOW layout="480,147" align="relative">
+				<WINDOW layout="0,0,420,147" defaultImg="#ddb93d5d">
+					<BUTTON layout="27,24,100sr,100sr" defaultImg="res/thumb_default1.png" />
+					<LABEL layout="147,0,273,147" text="로그인" fontSize="40" minFontSize="-1" textAlign="vCenter" textColor="#ffffff" textShadow="#000000" />
+				</WINDOW> 
+				<IMAGE layout="420,0,60,148" defaultImg="res/btn_close_menu.png" onClick="function.menuCheck" />
+			</WINDOW>
+			<WINDOW layout="420,1083" align="linear:vertical" defaultImg="#dd000000">
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="50,0,300,100" text="CATEGORY" fontSize="30" minFontSize="-1" textAlign="vCenter" textColor="#ffffff" fontStyle="bold" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="120,0,300,100" text="{xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM[1]/NAME/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter"
+						textColor="#a2a1a1" onClick="{userVariable.categoryName = caller.text,function.setListDataSource('1', caller.text)}" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="120,0,300,100" text="{xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM[2]/NAME/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter"
+						textColor="#a2a1a1" onClick="{userVariable.categoryName = caller.text,function.setListDataSource('2', caller.text)}" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="120,0,300,100" text="{xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM[3]/NAME/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter"
+						textColor="#a2a1a1" onClick="{userVariable.categoryName = caller.text,function.setListDataSource('3', caller.text)}" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="120,0,300,100" text="{xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM[4]/NAME/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter"
+						textColor="#a2a1a1" onClick="{userVariable.categoryName = caller.text,function.setListDataSource('4', caller.text)}" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="120,0,300,100" text="{xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM[5]/NAME/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter"
+						textColor="#a2a1a1" onClick="{userVariable.categoryName = caller.text,function.setListDataSource('5', caller.text)}" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="120,0,300,100" text="{xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM[6]/NAME/text()')}" fontSize="30" minFontSize="-1" textAlign="vCenter"
+						textColor="#a2a1a1" onClick="{userVariable.categoryName = caller.text,function.setListDataSource('6', caller.text)}" />
+				</WINDOW>
+				<WINDOW layout="420,100" align="relative">
+					<LABEL layout="50,0,300,100" text="BEST" fontSize="30" minFontSize="-1" textAlign="vCenter" textColor="#ffffff" fontStyle="bold" onClick="function.goBest" />
+				</WINDOW>
+			</WINDOW>
+		</WINDOW>
+		<WINDOW id="flickWindow" layout="0,0,40,1230" onFlickRight="function.menuCheck" onFlickLeft="function.menuCheck" />
+		<WINDOW id="searchWindow" layout="0,0,720,1230" align="relative" defaultImg="res/intro.png" visible="invisible">
+			<WINDOW layout="0,0,720,1230" align="relative" defaultImg="#99000000">
+				<BUTTON layout="25,25,92sr,92sr" defaultImg="res/btn_back.png" onClick="function.searchCheck" />
+				<EDIT id="searchEdit" layout="146,30,550,84" text="{saveVariable.searchName}" placeholder="검색어를 입력하세요." placeholderColor="#c9c9c9" returnKeyType="search" onChange="" onReturnKey="" fontSize="30"
+					textColor="#000000" fontStyle="bold" textAlign="vCenter" defaultImg="res/img_textbox2.png" />
+				<BUTTON layout="626,30,94,84" defaultImg="res/btn_delete_text.png" onClick="searchEdit.text = ''" />
+			</WINDOW>
+		</WINDOW>
+	</UILAYOUT>
+	<CMD cmd="userVariable.menuValue = 'false'" />
+	<CMD cmd="userVariable.categoryName = '냄비/주전자'" />
+
+	<FUNCTION id="menuCheck">
+		<CMD condition="userVariable.menuValue == 'false'" cmd="function.menuVisible" elseCmd="function.menuInvisible" />
+	</FUNCTION>
+
+	<FUNCTION id="searchCheck">
+		<CMD condition="searchWindow.visible == 'invisible'" cmd="function.searchVisible" elseCmd="function.searchInvisible" />
+	</FUNCTION>
+
+	<FUNCTION id="menuVisible">
+		<CMD cmd="userVariable.menuValue = 'true'" />
+		<CMD cmd="animation.show('bgWindow', 'fade', '', 500, '')" />
+		<CMD cmd="animation.flyIn('menuWindow', -480, 0, menuWindow.width,menuWindow.height, 'easeIn7', 500, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="menuInvisible">
+		<CMD cmd="userVariable.menuValue = 'false'" />
+		<CMD cmd="animation.hide('bgWindow', 'fade', '', 500, '')" />
+		<CMD cmd="animation.flyOut('menuWindow', -480, 0, menuWindow.width,menuWindow.height, 'easeIn7', 500, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="searchVisible">
+		<CMD cmd="animation.flyOut('mainWindow', 0, 0, 0,mainWindow.height, '', 500, '')" />
+		<CMD cmd="animation.flyIn('searchWindow', 720, 0, searchWindow.width, searchWindow.height, '', 500, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="searchInvisible">
+		<CMD cmd="animation.flyIn('mainWindow', 0, 0, 0,mainWindow.height, '', 500, '')" />
+		<CMD cmd="animation.flyOut('searchWindow', 720, 0, searchWindow.width, searchWindow.height, '', 500, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="setListDataSource(index,name)">
+		<CMD cmd="start_navigationContainer.selectItem = 'list'" />
+		<CMD cmd="titleLabel.text = name" />
+		<CMD cmd="root.start_navigationContainer.list.myShop.dataSource = xpath.evaluateEx(file.read('http://www.marihas.com/logeo/index.php'), '/DATA/ITEMLIST/ITEM['+index+']/URL/text()')" delay="100" />
+		<CMD cmd="function.menuInvisible" delay="500" />
+	</FUNCTION>
+
+
+	<FUNCTION id="goBest">
+		<CMD cmd="start_navigationContainer.selectItem = 'best'" />
+		<CMD cmd="titleLabel.text = 'best'" />
+		<CMD cmd="function.menuInvisible" delay="500" />
+	</FUNCTION>
+
+	<FUNCTION id="onScroll(x,y)">
+		<CMD cmd="h = 900" />
+		<CMD cmd="device.log('cgy', 'onScroll : ' + y)" />
+		<CMD condition="y lt h">
+			<CMD>
+				<CMD cmd="alpha = math.max(0, math.min(y,h)/h) * 255" />
+				<CMD cmd="backBg.top = - y / 2" />
+				<CMD cmd="backBtn.left =  - y / 5" />
+				<CMD cmd="shareBtn.left =   y / 5" />
+			</CMD>
+		</CMD>
+	</FUNCTION>
+</MOML> 

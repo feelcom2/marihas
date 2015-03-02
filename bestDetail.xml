@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by http://cafe.naver.com/citrineframework
+	You can freely copy, distribute, modify for commercial or non-commercial purposes.
+-->
+<MOML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui.xsd" version="1.1.1">
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<LIST id="best" layout="0,0,720,1230" dataSource="http://www.marihas.com/logeo/bestitem.php" dataList="/DATA/ITEMLIST/ITEM" divider="#00e4e4e4" onScroll="function.onScroll">
+			<LISTLAYOUT>
+				<WINDOW layout="0,0,720,690" align="relative" defaultImg="#ffffff">
+					<STYLEBUTTON id="underImage" layout="20,20,680,650" defaultImg="{xpath.evaluate('./IMAGE/text()')}" borderStyle="solid:2|#bdbdbd">
+						<WINDOW layout="2,390,676,90" defaultImg="res/img_mask2.png">
+							<LABEL layout="20,40,280,40" text="{math.add(xpath.position(), 1) + ' 위'}" fontSize="40" minFontSize="-1" fontStyle="bold" textAlign="vCenter" textColor="#d93f67" />
+						</WINDOW>
+						<LABEL layout="2,480,676,168" text="{xpath.evaluate('./NAME/text()')}" fontSize="40" minFontSize="-1" fontStyle="bold" textAlign="vCenter" textColor="#000000" defaultImg="#ffffff" padding="20,20,20,20" />
+					</STYLEBUTTON>
+					<BUTTON layout="20,20,680,650" defaultImg="#00ffffff" pressedImg="#99000000" onClick="function.goDetail(xpath.evaluate('./URL/text()'))" />
+				</WINDOW>
+			</LISTLAYOUT>
+		</LIST> 
+	</UILAYOUT>
+	<FUNCTION id="goDetail(url)">
+		<CMD cmd="userVariable.dataUrl = url" />
+		<CMD cmd="animation.flyIn('caller.container.underImage', 30, 30, caller.container.underImage.width-60,caller.container.underImage.height-60, 'roundTrip|reverse', 500, '')" />
+		<CMD cmd="container.open('underDetail.xml', 'root.detail')" delay="500" />
+	</FUNCTION>
+</MOML> 
